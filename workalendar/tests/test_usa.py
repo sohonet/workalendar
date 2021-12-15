@@ -23,6 +23,7 @@ from workalendar.usa import (
     Utah, Vermont, Virginia, Washington, WestVirginia, Wisconsin, Wyoming,
     # Other territories, cities...
     AmericanSamoa, ChicagoIllinois, Guam, SuffolkCountyMassachusetts,
+    FederalReserveSystem,
 )
 
 PY2 = sys.version_info[0] == 2
@@ -1821,3 +1822,59 @@ class NormalShiftTestCaseExceptions(UnitedStatesTest):
         self.assertIn(fourth_july, holiday_dict)
         self.assertEqual(holiday_dict[fourth_july], "Independence Day")
         self.assertNotIn(observed, holiday_dict)
+
+
+class ShiftExceptionsNextYearTestCase(UnitedStatesTest):
+    class ShiftExceptionsCalendar(UnitedStates):
+        "Shift exception happens on jan 1st and XMas"
+        shift_exceptions = (
+            (1, 1),  # January 1st
+            (12, 25),  # Christmas Day
+        )
+
+    cal_class = ShiftExceptionsCalendar
+
+    def test_shift_2021(self):
+        # January 1st is a saturday in 2022
+        # As a consequence, Dec 31st should be a holiday.
+        # BUT here, January 1st is in the shift_exceptions,
+        # so 2021-12-31 should be a working day
+        holidays = self.cal.holidays_set(2021)
+        # XMas is a holiday
+        self.assertIn(date(2021, 12, 25), holidays)
+        # XMas eve is a working day
+        self.assertNotIn(date(2021, 12, 24), holidays)
+
+        # January 1st is a non-shift, Dec 31st should be a working day
+        self.assertNotIn(date(2021, 12, 31), holidays)
+        self.assertTrue(self.cal.is_working_day(date(2021, 12, 31)))
+
+
+class FederalReserveSystemTest(UnitedStatesTest):
+
+    cal_class = FederalReserveSystem
+
+    def test_juneteenth_day(self):
+
+        holidays = self.cal.holidays_set(2021)
+        juneteenth, _ = self.cal.get_juneteenth_day(2021)
+        self.assertEqual(date(2021, 6, 19), juneteenth)
+        # 2021-06-19 is a Saturday so holiday is shifted
+        self.assertIn(date(2021, 6, 18), holidays)
+
+        holidays = self.cal.holidays_set(2022)
+        juneteenth, _ = self.cal.get_juneteenth_day(2022)
+        self.assertEqual(date(2022, 6, 19), juneteenth)
+        # 2022-06-19 is a Sunday so holiday is shifted
+        self.assertIn(date(2022, 6, 20), holidays)
+
+        holidays = self.cal.holidays_set(2023)
+        juneteenth, _ = self.cal.get_juneteenth_day(2023)
+        self.assertEqual(date(2023, 6, 19), juneteenth)
+        self.assertIn(juneteenth, holidays)
+
+        # No JuneTeeth before 2021
+        holidays = self.cal.holidays_set(2020)
+        self.assertNotIn(date(2020, 6, 20), holidays)
+        with self.assertRaises(ValueError):
+            self.cal.get_juneteenth_day(2020)
