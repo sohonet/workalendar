@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 7.2.0.post1 (2022-05-30)
+
+FORK
+
+Cherry-pick:
+Fixed United Kingdom's 2022 holidays ; Spring Bank Holiday has been moved to the 3rd of June and Queen's Platinum Jubilee added to 2nd of June.
+
 ## v7.2.0 (2019-12-06)
 
 ### New calendars
