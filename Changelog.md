@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 7.2.0.post2 (2023-04-23)
+
+FORK
+
+Cherry-pick:
+Coronation of His Majesty King Charles III Bank holiday in 2023 to the UK calendar.
+
+
 ## 7.2.0.post1 (2022-05-30)
 
 FORK
