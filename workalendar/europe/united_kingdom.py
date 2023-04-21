@@ -24,6 +24,11 @@ class UnitedKingdom(WesternCalendar, ChristianMixin):
         2011: [(date(2011, 4, 29), "Royal Wedding"), ],
         2012: [(date(2012, 6, 5), "Queen’s Diamond Jubilee"), ],
         2022: [(date(2022, 6, 3), "Queen’s Platinum Jubilee bank holiday"), ],
+        2022: [(date(2022, 6, 3), "Queen’s Platinum Jubilee bank holiday"),
+               (date(2022, 9, 19), "State Funeral of Queen Elizabeth II"), ],
+        2023: [
+            (date(2023, 5, 8), "Coronation of His Majesty King Charles III"),
+        ],
     }
 
     def get_early_may_bank_holiday(self, year):
