@@ -1,8 +1,12 @@
 # CHANGELOG
 
-## 7.2.0.post2 (2023-04-23)
+## 7.2.0.post3 (2023-06-21)
 
-FORK
+Cherry-pick:
+New calendar: Added USA Federal Reserve System calendar by @ludsoft (#695)
+
+
+## 7.2.0.post2 (2023-04-23)
 
 Cherry-pick:
 Coronation of His Majesty King Charles III Bank holiday in 2023 to the UK calendar.
