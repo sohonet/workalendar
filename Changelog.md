@@ -1,14 +1,12 @@
 # CHANGELOG
 
-## 7.2.0.post2 (2023-04-23)
+## 7.2.0.post3 (2023-06-21)
 
-- Removed duplicate Proclamation Day for Latvia, by @Daglina (#686).
-- New calendar: Added Kazakhstan calendar by @atj01 (#688).
-- New calendar: Added Georgia (country) calendar by @atj01 (#687).
-- Added conditional holidays on 26th December and 2nd January in Neuchatel (Switzerland) (#697).
-- Added Federal Thanksgiving Monday and two conditional holidays on 26th December and 2nd January in Neuchatel (Switzerland) (#697).
-- Documentation: Fix the ``keep_datetime`` usage example in the "basic" doc (#690).
-- New calendar: Added USA Federal Reserve System calendar by @ludsoft (#695)
+Cherry-pick:
+New calendar: Added USA Federal Reserve System calendar by @ludsoft (#695)
+
+
+## 7.2.0.post2 (2023-04-23)
 
 Cherry-pick:
 Coronation of His Majesty King Charles III Bank holiday in 2023 to the UK calendar.
