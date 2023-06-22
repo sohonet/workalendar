@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
-from .core import UnitedStates
+from .core import UnitedStates, FederalReserveSystem
 
 from .alabama import (
     Alabama, AlabamaBaldwinCounty, AlabamaMobileCounty, AlabamaPerryCounty)
@@ -125,4 +125,5 @@ __all__ = [
     # Non-State territories
     'AmericanSamoa',
     'Guam',
+    'FederalReserveSystem'
 ]

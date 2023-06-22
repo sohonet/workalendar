@@ -4,8 +4,7 @@ from __future__ import (absolute_import, division, print_function,
 
 from datetime import date, timedelta
 
-from ..core import WesternCalendar, ChristianMixin
-from ..core import SUN, MON, TUE, WED, THU, FRI, SAT
+from ..core import MON, SAT, SUN, THU, TUE, WesternCalendar
 from ..registry_tools import iso_register
 
 
@@ -64,6 +63,9 @@ class UnitedStates(WesternCalendar, ChristianMixin):
 
     # Some regional variants
     include_mardi_gras = False
+
+    # Juneteenth
+    include_juneteenth = False
 
     # Shift day mechanism
     # These days won't be shifted to next MON or previous FRI
@@ -276,12 +278,14 @@ class UnitedStates(WesternCalendar, ChristianMixin):
             self.national_memorial_day_label
         )
 
-    def get_mardi_gras(self, year):
+    def get_juneteenth_day(self, year):
         """
-        Mardi Gras is the Tuesday happening 47 days before Easter
+        Return Juneteenth Day
         """
-        sunday = self.get_easter_sunday(year)
-        return (sunday - timedelta(days=47), "Mardi Gras")
+        # Juneteenth started to be a federal holiday in 2021
+        if year < 2021:
+            raise ValueError("Juneteenth became a federal holiday in 2021")
+        return (date(year, 6, 19), "Juneteenth National Independence Day")
 
     def get_variable_days(self, year):
         # usual variable days
@@ -341,6 +345,9 @@ class UnitedStates(WesternCalendar, ChristianMixin):
                 self.get_thanksgiving_friday(year)
             )
 
+        if self.include_juneteenth and year >= 2021:
+            days.append(self.get_juneteenth_day(year))
+
         return days
 
     def get_veterans_day(self, year):
@@ -364,3 +371,9 @@ class UnitedStates(WesternCalendar, ChristianMixin):
         days = super(UnitedStates, self).get_calendar_holidays(year)
         days = self.shift(days, year)
         return days
+
+
+class FederalReserveSystem(UnitedStates):
+    "Board of Governors of the Federal Reserve System of the USA"
+
+    include_juneteenth = True
