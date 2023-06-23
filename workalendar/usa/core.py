@@ -4,7 +4,8 @@ from __future__ import (absolute_import, division, print_function,
 
 from datetime import date, timedelta
 
-from ..core import MON, SAT, SUN, THU, TUE, WesternCalendar
+from workalendar.core import WesternCalendar, ChristianMixin
+from workalendar.core import SUN, MON, TUE, WED, THU, FRI, SAT
 from ..registry_tools import iso_register
 
 
